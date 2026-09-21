@@ -1,0 +1,9 @@
+Danh sách các file mã nguồn và thực nghiệm:
+
+1. dataset.py: Đọc, tiền xử lý và chia tập dữ liệu train/validation cho 3 lớp mèo, chó, gấu trúc.
+2. resnet50.py: Định nghĩa mô hình ResNet-50 và các hàm đóng băng hoặc mở đóng băng backbone.
+3. vgg19.py: Định nghĩa mô hình VGG-19 tiền huấn luyện để phân loại 3 lớp.
+4. efficientnet.py: Định nghĩa mô hình EfficientNet-B0 tiền huấn luyện để phân loại 3 lớp.
+5. 23001934_NguyenTrongThanh_Lab02B_v1.ipynb: Phần A.1 - So sánh hiệu năng giữa ResNet-50, VGG-19 và EfficientNet.
+6. 23001934_NguyenTrongThanh_Lab02B_v2.ipynb: Phần A.2 - Transfer Learning hai giai đoạn trên Xception và hiển thị ảnh dự đoán.
+7. 23001934_NguyenTrongThanh_Lab02B_v3.ipynb: Phần B - Thử nghiệm 3 mức độ đóng băng trên ResNet-50, vẽ đồ thị, bảng so sánh và ma trận nhầm lẫn.

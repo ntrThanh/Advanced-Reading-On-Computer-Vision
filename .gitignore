@@ -1,0 +1,121 @@
+# ==============================================================================
+# 1. DỮ LIỆU & BỘ DỮ LIỆU (DATASETS & RAW DATA)
+# ==============================================================================
+# Bỏ qua các thư mục dữ liệu ở mọi cấp
+dataset/
+datasets/
+data/
+Data/
+Datasets/
+UCF50/
+**/dataset/
+**/datasets/
+**/data/
+**/UCF50/
+
+# Các định dạng file nén chứa dataset nặng (vd: UCF50.rar, zip bài nộp, v.v.)
+*.rar
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.7z
+*.bz2
+
+# Định dạng dữ liệu video & âm thanh (vd: video hành động UCF50, v.v.)
+*.avi
+*.mp4
+*.mkv
+*.mov
+*.wmv
+*.flv
+*.webm
+*.wav
+*.mp3
+
+# Định dạng lưu trữ mảng/ma trận dữ liệu và dữ liệu tuần tự hóa
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.mat
+*.pkl
+*.pickle
+*.parquet
+*.feather
+
+# File dữ liệu bảng biểu lớn hoặc tạm thời (nếu có file csv cấu hình cần giữ, dùng !ten_file.csv)
+# *.csv
+# *.tsv
+# *.jsonl
+
+
+# ==============================================================================
+# 2. TRỌNG SỐ MÔ HÌNH & CHECKPOINTS (CHO PHÉP ĐẨY LÊN GIT THEO YÊU CẦU)
+# ==============================================================================
+# Giữ lại các file checkpoint (.pth, .pt, .ckpt,...) để commit lên git
+# (Nếu sau này muốn bỏ qua model nào quá nặng >100MB của GitHub, có thể bỏ comment)
+# *.pth
+# *.pt
+# *.ckpt
+# *.bin
+# *.weights
+# *.onnx
+# *.tflite
+# *.pb
+# *.keras
+# checkpoints/
+# **/checkpoints/
+# models/
+# **/models/
+# weights/
+# **/weights/
+
+
+
+# ==============================================================================
+# 3. NHẬT KÝ HUẤN LUYỆN & LOGS (TRAINING LOGS & RUNS)
+# ==============================================================================
+runs/
+logs/
+lightning_logs/
+wandb/
+tensorboard/
+*.log
+
+
+# ==============================================================================
+# 4. PYTHON & JUPYTER NOTEBOOK CACHE
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+
+# ==============================================================================
+# 5. MÔI TRƯỜNG ẢO (VIRTUAL ENVIRONMENTS)
+# ==============================================================================
+.env
+.venv
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+
+# ==============================================================================
+# 6. HỆ ĐIỀU HÀNH & TRÌNH SOẠN THẢO (OS & IDE FILES)
+# ==============================================================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
