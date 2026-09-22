@@ -1,0 +1,14 @@
+Danh sách các file mã nguồn, notebook thực nghiệm và báo cáo Lab 03:
+
+1. cnn3d.py: Định nghĩa kiến trúc mạng 3D CNN Baseline (3 nhánh Inception song song với kernel 3x3x3).
+2. cnn3d_v2.py: Định nghĩa kiến trúc mạng 3D CNN v2 (mở rộng nhánh song song với kernel 5x5x5).
+3. cnn3d_sequential.py: Định nghĩa kiến trúc mạng 3D CNN Sequential (các khối tích chập 3D nối tiếp nhau).
+4. mobilenetv4_gru.py: Định nghĩa kiến trúc 2D CNN + RNN sử dụng backbone MobileNetV4 kết hợp 2-layer Bidirectional GRU để phân loại chuỗi video.
+5. dataset.py: Xử lý dataset UCF50, trích xuất khung hình video thời gian thực, tiền xử lý và DataLoader hỗ trợ 3D CNN và 2D CNN.
+6. train_early_fusion.py: Huấn luyện mô hình 2D CNN Early Fusion (ghép kênh RGB + Optical Flow thành tensor 13 kênh đưa vào 1 backbone MobileNetV3-Small).
+7. 23001934_NguyenTrongThanh_Lab03.ipynb: Bài tập 1 (Phần A) - Huấn luyện mô hình 3D CNN Baseline (80/20 train/val), ma trận nhầm lẫn và đánh giá độ chính xác (Top-1: 74.61%).
+8. 23001934_NguyenTrongThanh_Lab03_v2.ipynb: Bài tập 2 (Phần A) - Huấn luyện mô hình 3D CNN v2 với filter 5x5x5 (Top-1: 78.01%).
+9. 23001934_NguyenTrongThanh_Lab03_v3_sequential.ipynb: Bài tập 3 (Phần A) - Huấn luyện mô hình 3D CNN Sequential nối tiếp (Top-1: 81.40%, tốc độ suy luận nhanh nhất 1.15ms).
+10. 23001934_NguyenTrongThanh_Lab03_v4_mobilenetv4_gru.ipynb: Phần D - 2D CNN & RNN với MobileNetV4 + GRU thay thế cho ResNet152 (Top-1: 97.86%, Top-5: 99.70%).
+11. 23001934_NguyenTrongThanh_Lab03_v5_2dcnn_fusion.ipynb: Phần B & C - 2D CNN kết hợp Two-Stream Fusion (Late Fusion vs Early Fusion) với backbone MobileNetV3-Small thay cho ResNet18, kèm phân tích và so sánh trực tiếp chi tiết.
+12. 23001934_NguyenTrongThanh_Lab03_benchmark_comparison.ipynb: Báo cáo Benchmark tổng thể đa tiêu chí (Accuracy, Latency, FPS, Params, Checkpoint Size, Trade-off) kèm 5 biểu đồ trực quan so sánh tất cả các kiến trúc đã thử nghiệm.

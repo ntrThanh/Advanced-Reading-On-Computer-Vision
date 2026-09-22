@@ -1,0 +1,2 @@
+best_epoch=9
+val_acc=0.9609
