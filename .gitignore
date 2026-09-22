@@ -55,7 +55,9 @@ UCF50/
 # 2. TRỌNG SỐ MÔ HÌNH & CHECKPOINTS (CHO PHÉP ĐẨY LÊN GIT THEO YÊU CẦU)
 # ==============================================================================
 # Giữ lại các file checkpoint (.pth, .pt, .ckpt,...) để commit lên git
-# (Nếu sau này muốn bỏ qua model nào quá nặng >100MB của GitHub, có thể bỏ comment)
+# Bỏ qua checkpoint vượt giới hạn 100MB của GitHub
+Lap03_3DCNN_Action_Recognition/best_mobilenetv4_gru.pth
+
 # *.pth
 # *.pt
 # *.ckpt
