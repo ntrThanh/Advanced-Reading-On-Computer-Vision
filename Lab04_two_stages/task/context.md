@@ -25,7 +25,7 @@ Theo tài liệu hướng dẫn `Lap4_two_stages_object_detection (1).pdf`, mụ
 | **Mục 3.4** | NMS: Thử nghiệm lọc chồng lấn bounding box với các ngưỡng IoU khác nhau | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v1.ipynb` |
 | **Mục 4.1** | Chạy suy luận Faster R-CNN v2 Pretrained (PyTorch), trực quan hóa ảnh | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v2.ipynb` |
 | **Mục 4.2** | Chạy suy luận nhanh Faster R-CNN bằng TensorFlow Hub (`resnet50_v1`) | Chưa làm | Đề xuất cho các bước sau |
-| **Mục 5.1** | Fine-tune Faster R-CNN với PyTorch trên Pascal VOC XML dataset | **Cần làm tiếp** | **Đề xuất thực hiện trong `v3`** |
+| **Mục 5.1** | Fine-tune Faster R-CNN (Giai đoạn 1: Huấn luyện Box Predictor trên tập Aquarium) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v3.ipynb` |
 | **Mục 5.2** | Fine-tune chuẩn với TensorFlow Object Detection API (TFRecord + pipeline) | Chưa làm | Tùy chọn nâng cao |
 | **Mục 6** | Mổ xẻ từng bước trong Faster R-CNN trên 01 ảnh thật (FPN -> RPN -> RoI Align -> Heads) | Chưa làm | Đề xuất thực hiện trong `v4` |
 | **Mục 7** | Bài tập nâng cao & Kiểm thử (Ablation FPN, RoI Align vs Pool, IoU sweep) | Chưa làm | Đề xuất thực hiện sau fine-tune |
@@ -57,6 +57,15 @@ Theo tài liệu hướng dẫn `Lap4_two_stages_object_detection (1).pdf`, mụ
   - `image copy.png` (Hổ - Tiger): Dự đoán `zebra` (99.93%).
   - `image.png` (Vẹt - Macaw): Dự đoán `bird` (99.87%).
 - **Nhận xét**: Viết dạng các đoạn văn ngắn, không bôi đen, giải thích tự nhiên hiện tượng Out-of-Distribution do tập nhãn COCO không có sư tử, báo, hổ.
+
+### 3.3 File `v3`: `submit/23001934_NguyenTrongThanh_Lab04_v3.ipynb`
+- **Nội dung**: Hoàn thành **Mục 5.1 (Fine-tune Faster R-CNN Giai đoạn 1 - Box Predictor)**.
+- **Các thành phần**:
+  - `5.1 Chuẩn bị dữ liệu`: Xây dựng class `AquariumDataset` đọc dữ liệu COCO format từ tập Aquarium Combined (448 ảnh train, 127 ảnh valid), trích xuất bounding box và mapping 7 loài sinh vật biển (`fish`, `jellyfish`, `penguin`, `puffin`, `shark`, `starfish`, `stingray`).
+  - `5.2 Cấu hình mô hình`: Nạp Faster R-CNN v2 pretrained, thay thế `roi_heads.box_predictor` bằng `FastRCNNPredictor` (8 lớp tính cả background). Đóng băng toàn bộ mạng và chỉ mở gradient cho `box_predictor` (giảm số tham số cần train xuống còn 41,000 tham số, tương đương 0.1% tổng tham số).
+  - `5.3 Huấn luyện siêu tốc & Đánh giá chuẩn YOLO`: Tối ưu với Effective Batch Size = 32 (thông qua Gradient Accumulation 8 bước và micro-batch 4 kết hợp AMP FP16 kích hoạt Tensor Cores trên GPU RTX 3060), tích hợp bảng đánh giá chuẩn YOLO (Precision, Recall, mAP@50, mAP@50:95 cho toàn bộ và từng lớp đối tượng), cơ chế Early Stopping theo dõi đỉnh mAP50, và tự động ghi log vào `outputs/stage1_training_log.json`. Trọng số tốt nhất được lưu tại `outputs/fasterrcnn_aquarium_stage1.pt`.
+  - `5.4 Trực quan hóa suy luận`: Kiểm thử mô hình sau khi tinh chỉnh trên các mẫu ảnh từ tập validation, vẽ bounding box và hiển thị điểm tin cậy rõ nét theo từng loài.
+- **Quy chuẩn mã nguồn**: Tuyệt đối không chứa comment trong code cell, tương thích đa môi trường (Colab/Server/Local) qua `possible_data_dirs`, nhận xét súc tích phân tích cơ chế đóng băng và khả năng thích ứng miền nhãn mới.
 
 ---
 
