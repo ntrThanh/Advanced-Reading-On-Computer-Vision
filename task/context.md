@@ -27,7 +27,7 @@ Theo tài liệu hướng dẫn `Lap4_two_stages_object_detection (1).pdf`, mụ
 | **Mục 4.2** | Chạy suy luận nhanh Faster R-CNN bằng TensorFlow Hub (`resnet50_v1`) | Chưa làm | Đề xuất cho các bước sau |
 | **Mục 5.1** | Fine-tune Faster R-CNN (Giai đoạn 1: Huấn luyện Box Predictor trên tập Aquarium) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v3.ipynb` |
 | **Mục 5.2** | Fine-tune chuẩn với TensorFlow Object Detection API (TFRecord + pipeline) | Chưa làm | Tùy chọn nâng cao |
-| **Mục 6** | Mổ xẻ từng bước trong Faster R-CNN trên 01 ảnh thật (FPN -> RPN -> RoI Align -> Heads) | Chưa làm | Đề xuất thực hiện trong `v4` |
+| **Mục 6** | Mổ xẻ từng bước trong Faster R-CNN trên 01 ảnh thật (FPN -> RPN -> RoI Align -> Heads) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v4.ipynb` |
 | **Mục 7** | Bài tập nâng cao & Kiểm thử (Ablation FPN, RoI Align vs Pool, IoU sweep) | Chưa làm | Đề xuất thực hiện sau fine-tune |
 | **Bài tập thực tế** | Thu thập 2000 ảnh, gán nhãn tự động, gộp nhãn, huấn luyện và test trên 1000 ảnh mới | Chưa làm | Dự án cuối lab |
 
@@ -66,6 +66,18 @@ Theo tài liệu hướng dẫn `Lap4_two_stages_object_detection (1).pdf`, mụ
   - `5.3 Huấn luyện siêu tốc & Đánh giá chuẩn YOLO`: Tối ưu với Effective Batch Size = 32 (thông qua Gradient Accumulation 8 bước và micro-batch 4 kết hợp AMP FP16 kích hoạt Tensor Cores trên GPU RTX 3060), tích hợp bảng đánh giá chuẩn YOLO (Precision, Recall, mAP@50, mAP@50:95 cho toàn bộ và từng lớp đối tượng), cơ chế Early Stopping theo dõi đỉnh mAP50, và tự động ghi log vào `outputs/stage1_training_log.json`. Trọng số tốt nhất được lưu tại `outputs/fasterrcnn_aquarium_stage1.pt`.
   - `5.4 Trực quan hóa suy luận`: Kiểm thử mô hình sau khi tinh chỉnh trên các mẫu ảnh từ tập validation, vẽ bounding box và hiển thị điểm tin cậy rõ nét theo từng loài.
 - **Quy chuẩn mã nguồn**: Tuyệt đối không chứa comment trong code cell, tương thích đa môi trường (Colab/Server/Local) qua `possible_data_dirs`, nhận xét súc tích phân tích cơ chế đóng băng và khả năng thích ứng miền nhãn mới.
+
+### 3.4 File `v4`: `submit/23001934_NguyenTrongThanh_Lab04_v4.ipynb`
+- **Nội dung**: Hoàn thành toàn diện **Mục 6 (Mổ xẻ Faster R-CNN và thực hiện từng chức năng)** trên ảnh thực tế.
+- **Các thành phần**:
+  - `6.1 Thiết lập & Nạp mô hình`: Tải Faster R-CNN ResNet-50 FPN v2 pretrained, tự động quét thư mục ảnh qua `possible_image_dirs`.
+  - `6.2 Bước 1 - FPN`: Trích xuất đặc trưng đa tầng $P_2, P_3, P_4, P_5, P_6$, vẽ bản đồ nhiệt phân tích trường tiếp nhận và kích thước feature map.
+  - `6.3 Bước 2 - RPN`: Đặt lưới anchor, tính điểm objectness và bbox deltas, lọc NMS tầng 1 và vẽ trực quan top 50 và top 15 proposals tiềm năng.
+  - `6.4 Bước 3 - RoI Align`: Trích xuất patch $7 \times 7 \times 256$ bằng nội suy song tuyến (bilinear interpolation) cho các proposal kích thước đa dạng.
+  - `6.5 Bước 4 - RoI Heads`: Nén qua `box_head` 1024-d, phân loại qua `cls_score` và hồi quy hộp qua `bbox_pred`, trực quan hóa sự tinh chỉnh hộp so với proposal ban đầu của RPN.
+  - `6.6 Bước 5 - Post-processing`: Lọc điểm tin cậy $\ge 0.5$, lọc NMS lần 2 theo từng lớp (Per-class NMS) và xuất ảnh phát hiện hoàn chỉnh (Bird: 99.87%).
+  - `6.7 Đánh giá mở rộng`: Kiểm thử hai giai đoạn trên toàn bộ 4 ảnh thực tế (`image copy 2.png`, `image copy 3.png`, `image copy.png`, `image.png`), so sánh trực quan đề xuất RPN và kết quả phân loại cuối.
+- **Quy chuẩn mã nguồn**: Không chứa comment trong code cell, chạy tốt cả GPU/CPU, nhận xét Markdown phân tích sâu sắc bản chất hai giai đoạn.
 
 ---
 
