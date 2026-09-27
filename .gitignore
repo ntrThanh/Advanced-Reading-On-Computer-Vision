@@ -2,12 +2,15 @@
 # 1. DỮ LIỆU & BỘ DỮ LIỆU (DATASETS & RAW DATA)
 # ==============================================================================
 # Bỏ qua các thư mục dữ liệu ở mọi cấp
+dataset
 dataset/
 datasets/
 data/
 Data/
 Datasets/
 UCF50/
+VOCdevkit/
+**/VOCdevkit/
 **/dataset/
 **/datasets/
 **/data/
