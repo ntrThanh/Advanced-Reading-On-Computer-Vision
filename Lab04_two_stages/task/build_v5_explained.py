@@ -117,7 +117,7 @@ plt.show()"""
 cells.append(nbf.v4.new_code_cell(cell_6_code))
 
 # Cell 7: Explanation of 25-image Ground Truth
-cell_7_md = """**Nhận xét về lưới 25 ảnh Ground Truth:**
+cell_7_md = """**Nhận xét:**
 - Tập dữ liệu Pascal VOC 2007 có phân bố rất đa dạng về kích thước và bối cảnh: bao gồm phương tiện giao thông cỡ lớn (bus, train), động vật (dog, cat, cow, horse, sheep), người và đồ gia dụng trong nhà (chair, sofa, tvmonitor).
 - Các trường hợp thử thách tiêu biểu xuất hiện rõ: nhiều đối tượng cùng loại đứng sát nhau gây che khuất (ảnh đàn cừu, 3 chú chó), và các vật thể kích thước nhỏ ở hậu cảnh (chim trên cành cây)."""
 cells.append(nbf.v4.new_markdown_cell(cell_7_md))
@@ -176,7 +176,7 @@ for iou_t, boxes, _, _ in nms_results:
 cells.append(nbf.v4.new_code_cell(cell_11_code))
 
 # Cell 12: Explanation of NMS Sweep
-cell_12_md = """**Nhận xét về thực nghiệm NMS Sweep (Ảnh 001984 có 3 chú chó nằm sát nhau):**
+cell_12_md = """**Nhận xét:**
 - Ngưỡng IoU = 0.3 (Lọc gắt): Chỉ giữ lại 4 boxes. Ngưỡng này loại bỏ triệt để box trùng nhưng dễ xóa nhầm các đối tượng thật đứng sát nhau, dẫn đến giảm Recall.
 - Ngưỡng IoU = 0.7 (Lọc lỏng): Giữ lại 6 boxes. Ngưỡng này bắt trọn đối tượng nhưng để sót lại các hộp bao trùng lặp lên cùng một vật thể, dẫn đến giảm Precision.
 - Ngưỡng IoU = 0.5: Giữ lại 5 boxes, là mức dung hòa tối ưu nhất giữa Precision và Recall trong các bài toán phát hiện hai giai đoạn."""
@@ -235,7 +235,7 @@ plt.show()"""
 cells.append(nbf.v4.new_code_cell(cell_15_code))
 
 # Cell 16: Explanation of RoI Align vs Pool
-cell_16_md = """**Nhận xét về thực nghiệm RoI Align vs RoI Pool:**
+cell_16_md = """**Nhận xét:**
 - Cơ chế RoI Pool làm tròn tọa độ thành số nguyên (phép lượng tử hóa) khiến vị trí patch đặc trưng bị dịch chuyển tối đa 0.5 đến 1 pixel trên feature map (tương đương lệch 16-32 pixel trên ảnh gốc), dẫn đến sai số rất lớn (MAE = 0.4119).
 - RoI Align sử dụng nội suy song tuyến (bilinear interpolation) lấy mẫu chính xác tại các điểm phân số, loại bỏ hoàn toàn sai số làm tròn và bảo toàn độ chính xác vị trí cho nhánh hồi quy bounding box."""
 cells.append(nbf.v4.new_markdown_cell(cell_16_md))
@@ -302,7 +302,7 @@ print(f"Size on C5 feature map (stride 32): {bw/32:.1f} x {bh/32:.1f} px")"""
 cells.append(nbf.v4.new_code_cell(cell_19_code))
 
 # Cell 20: Explanation of FPN Ablation
-cell_20_md = """**Nhận xét về thực nghiệm FPN đối với vật thể nhỏ (Ảnh 001997 - Chim nhỏ):**
+cell_20_md = """**Nhận xét:**
 - Tại tầng nông P2 (stride 4): Vật thể giữ được kích thước 31.2 x 63.2 px trên feature map, cấu trúc biên và vị trí không gian được bảo toàn rõ nét.
 - Tại tầng sâu C5/P5 (stride 32): Vật thể bị co lại chỉ còn 3.9 x 7.9 px. Với các vật thể nhỏ thực tế (~20 px), kích thước trên C5 sẽ giảm xuống dưới 1 pixel và bị hòa lẫn hoàn toàn vào nền.
 - Kết luận: Cấu trúc FPN là thành phần bắt buộc để Faster R-CNN phát hiện thành công các vật thể nhỏ và đa tỉ lệ."""
@@ -405,7 +405,7 @@ plt.show()"""
 cells.append(nbf.v4.new_code_cell(cell_24_code))
 
 # Cell 25: Explanation of Augmentation Loss Curves
-cell_25_md = """**Nhận xét về thực nghiệm Data Augmentation:**
+cell_25_md = """**Nhận xét:**
 - Nhánh không Augmentation (đường xanh) giảm loss nhanh và dốc hơn ở các epoch đầu do chỉ khớp trên tập mẫu cố định, tiềm ẩn nguy cơ học vẹt (overfitting).
 - Nhánh có Augmentation (đường cam) có loss ban đầu cao hơn một chút do phân bố dữ liệu biến đổi liên tục (lật ảnh, đổi độ sáng tương phản), nhưng giúp mô hình học các đặc trưng bất biến không gian và khái quát hóa tốt hơn trên tập test."""
 cells.append(nbf.v4.new_markdown_cell(cell_25_md))
