@@ -58,8 +58,11 @@ VOCdevkit/
 # 2. TRỌNG SỐ MÔ HÌNH & CHECKPOINTS (CHO PHÉP ĐẨY LÊN GIT THEO YÊU CẦU)
 # ==============================================================================
 # Giữ lại các file checkpoint (.pth, .pt, .ckpt,...) để commit lên git
-# Bỏ qua checkpoint vượt giới hạn 100MB của GitHub
 Lap03_3DCNN_Action_Recognition/best_mobilenetv4_gru.pth
+Lab04_two_stages/outputs/
+Lab04_two_stages/submit/outputs/*.pt
+Lab04_two_stages/capstone_project/
+**/capstone_project/
 
 # *.pth
 # *.pt

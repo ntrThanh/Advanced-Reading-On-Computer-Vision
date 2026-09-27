@@ -28,8 +28,8 @@ Theo tài liệu hướng dẫn `Lap4_two_stages_object_detection (1).pdf`, mụ
 | **Mục 5.1** | Fine-tune Faster R-CNN (Giai đoạn 1: Huấn luyện Box Predictor trên tập Aquarium) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v3.ipynb` |
 | **Mục 5.2** | Fine-tune chuẩn với TensorFlow Object Detection API (TFRecord + pipeline) | Chưa làm | Tùy chọn nâng cao |
 | **Mục 6** | Mổ xẻ từng bước trong Faster R-CNN trên 01 ảnh thật (FPN -> RPN -> RoI Align -> Heads) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v4.ipynb` |
-| **Mục 7** | Bài tập nâng cao & Kiểm thử (Ablation FPN, RoI Align vs Pool, IoU sweep) | Đang thực hiện | `submit/23001934_NguyenTrongThanh_Lab04_v5.ipynb` |
-| **Bài tập thực tế** | Thu thập 2000 ảnh, gán nhãn tự động, gộp nhãn, huấn luyện và test trên 1000 ảnh mới | Chưa làm | Dự án cuối lab |
+| **Mục 7** | Bài tập nâng cao & Kiểm thử (Ablation FPN, RoI Align vs Pool, IoU sweep) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v5.ipynb` |
+| **Bài tập thực tế** | Thu thập 2000 ảnh, gán nhãn tự động, gộp nhãn, huấn luyện và test trên 1000 ảnh mới | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v6.ipynb` |
 
 ---
 
@@ -78,6 +78,29 @@ Theo tài liệu hướng dẫn `Lap4_two_stages_object_detection (1).pdf`, mụ
   - `6.6 Bước 5 - Post-processing`: Lọc điểm tin cậy $\ge 0.5$, lọc NMS lần 2 theo từng lớp (Per-class NMS) và xuất ảnh phát hiện hoàn chỉnh (Bird: 99.87%).
   - `6.7 Đánh giá mở rộng`: Kiểm thử hai giai đoạn trên toàn bộ 4 ảnh thực tế (`image copy 2.png`, `image copy 3.png`, `image copy.png`, `image.png`), so sánh trực quan đề xuất RPN và kết quả phân loại cuối.
 - **Quy chuẩn mã nguồn**: Không chứa comment trong code cell, chạy tốt cả GPU/CPU, nhận xét Markdown phân tích sâu sắc bản chất hai giai đoạn.
+
+### 3.5 File `v5`: `submit/23001934_NguyenTrongThanh_Lab04_v5.ipynb`
+- **Nội dung**: Hoàn thành toàn diện **Mục 7 (Bài tập nâng cao & Kiểm thử - Ablation Studies)**.
+- **Các thành phần**:
+  - `7.1 Thiết lập & Nạp cấu hình`: Tự động nhận diện thiết bị CUDA/CPU, tương thích Pascal VOC 2007.
+  - `7.2 Trực quan hóa dữ liệu nhãn GT`: Hiển thị 25 ảnh mẫu bao phủ 20 lớp đối tượng VOC kèm nhận xét.
+  - `7.3 Thực nghiệm 1 - NMS IoU Sweep`: Thử nghiệm các ngưỡng IoU 0.3, 0.5, 0.7, phân tích sự đánh đổi giữa Precision và Recall.
+  - `7.4 Thực nghiệm 2 - RoI Align vs RoI Pool`: Đo lường định lượng sai số làm tròn số nguyên của RoI Pool (MAE = 0.4119) so với nội suy song tuyến của RoI Align.
+  - `7.5 Thực nghiệm 3 - FPN Ablation`: Chứng minh sự suy giảm và mất mát thông tin của vật thể nhỏ ở tầng sâu C5 (stride 32) so với tầng FPN P2 (stride 4).
+  - `7.6 Thực nghiệm 4 - Data Augmentation`: So sánh đường cong huấn luyện (Loss Curves) giữa baseline và augmented (RandomHorizontalFlip, ColorJitter).
+  - `7.7 Tổng kết thực nghiệm`: Đúc kết kết quả định lượng và định tính của các mắt xích kiến trúc.
+- **Quy chuẩn mã nguồn**: 0 comment trong code cell, nhận xét Markdown viết tự nhiên không bôi đen (`**`), tách cell rõ ràng.
+
+### 3.6 File `v6`: `submit/23001934_NguyenTrongThanh_Lab04_v6.ipynb`
+- **Nội dung**: Hoàn thành trọn vẹn **Bài tập thực tế (Capstone Project)** trên tập dữ liệu giao thông đô thị.
+- **Các thành phần**:
+  - `Phần 1 & 2`: Thiết lập môi trường và phân chia 2,000 ảnh huấn luyện (gán nhãn giả) và 1,000 ảnh kiểm thử độc lập.
+  - `Phần 3`: Dự đoán nhãn tự động (Pseudo-labeling) bằng Faster R-CNN pretrained và xuất 2,000 tệp Pascal VOC XML chuẩn (`voc_traffic/Annotations`).
+  - `Phần 4`: Gộp nhóm nhãn (car, bus, truck, motorcycle, bicycle -> vehicle; person -> pedestrian), thống kê 12,891 đối tượng (2,908 vehicle, 9,983 pedestrian) và trực quan hóa 24 ảnh mẫu kèm nhận xét.
+  - `Phần 5`: Xây dựng `TrafficVOCDataset` (80% train / 20% val), huấn luyện 25 epochs kết hợp Early Stopping (patience=4, min_delta=0.003). Dừng sớm tại epoch 15 và phục hồi mô hình tối ưu từ epoch 11 (Val Loss 0.2314), lưu trọng số tại `outputs/fasterrcnn_capstone_traffic.pt`. Vẽ biểu đồ Train Loss vs Val Loss.
+  - `Phần 6`: Kiểm thử trên toàn bộ 1,000 ảnh mới độc lập (14.2 FPS), phát hiện 2,023 vehicles và 4,824 pedestrians với độ tin cậy trung bình 0.8811, trực quan hóa 24 ảnh test thực tế kèm nhận xét.
+  - `Phần 7`: Tổng hợp kết quả toàn bộ pipeline.
+- **Quy chuẩn mã nguồn**: 0 comment trong code cell, nhận xét không bôi đen, tách cell rành mạch.
 
 ---
 
