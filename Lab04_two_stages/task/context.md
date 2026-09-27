@@ -28,7 +28,7 @@ Theo tài liệu hướng dẫn `Lap4_two_stages_object_detection (1).pdf`, mụ
 | **Mục 5.1** | Fine-tune Faster R-CNN (Giai đoạn 1: Huấn luyện Box Predictor trên tập Aquarium) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v3.ipynb` |
 | **Mục 5.2** | Fine-tune chuẩn với TensorFlow Object Detection API (TFRecord + pipeline) | Chưa làm | Tùy chọn nâng cao |
 | **Mục 6** | Mổ xẻ từng bước trong Faster R-CNN trên 01 ảnh thật (FPN -> RPN -> RoI Align -> Heads) | Đã hoàn thành | `submit/23001934_NguyenTrongThanh_Lab04_v4.ipynb` |
-| **Mục 7** | Bài tập nâng cao & Kiểm thử (Ablation FPN, RoI Align vs Pool, IoU sweep) | Chưa làm | Đề xuất thực hiện sau fine-tune |
+| **Mục 7** | Bài tập nâng cao & Kiểm thử (Ablation FPN, RoI Align vs Pool, IoU sweep) | Đang thực hiện | `submit/23001934_NguyenTrongThanh_Lab04_v5.ipynb` |
 | **Bài tập thực tế** | Thu thập 2000 ảnh, gán nhãn tự động, gộp nhãn, huấn luyện và test trên 1000 ảnh mới | Chưa làm | Dự án cuối lab |
 
 ---
